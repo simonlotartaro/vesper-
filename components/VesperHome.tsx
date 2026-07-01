@@ -140,7 +140,7 @@ export default function VesperHome() {
                   </div>
                   {/* bottom nav button */}
                   <div style={{ position: "absolute", bottom: "9vh", left: 0, right: 0, display: "flex", flexDirection: "column", alignItems: "center", gap: 12, pointerEvents: "auto" }}>
-                    <span style={{ width: 1, height: 28, background: "rgba(198,162,88,0.7)" }} />
+                    <span style={{ width: 28, height: 1, background: "rgba(198,162,88,0.7)" }} />
                     <a href="#" onClick={(e) => { e.preventDefault(); if (col.nav === "About") setAboutOpen(true); if (col.nav === "Contact") { setContactSubmitted(false); setRobotChecked(false); setContactOpen(true); } if (col.nav === "Members") { setMembersStep("login"); setMembersEmail(""); setMembersOpen(true); } }} style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: 13, letterSpacing: "0.3em", textTransform: "uppercase", color: active ? "#C6A258" : "rgba(198,162,88,0.85)", textDecoration: "none", transition: "color .6s ease" }}>{col.nav}</a>
                   </div>
                 </div>
@@ -156,9 +156,6 @@ export default function VesperHome() {
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img src="/assets/vesper-logo.png" alt="Vesper" style={{ width: "clamp(150px,15vw,224px)", height: "auto", display: "block", filter: "drop-shadow(0 14px 40px rgba(0,0,0,0.6))", animation: "vUp 1.3s both" }} />
             <p style={{ fontFamily: "'Cormorant Garamond', serif", fontStyle: "italic", fontWeight: 300, fontSize: "clamp(20px,2.4vw,30px)", color: "#F4EFE4", margin: "30px 0 0", animation: "vUp 1.3s .12s both" }}>Pressure is a privilege.</p>
-            <p style={{ fontSize: "clamp(12px,1.1vw,14px)", letterSpacing: "0.04em", color: "#9b988e", fontWeight: 300, margin: "14px 0 0", maxWidth: 380, animation: "vUp 1.3s .2s both" }}>Private access to the world&apos;s defining sporting moments.</p>
-            <button onClick={openModal} className="v-cta" style={{ pointerEvents: "auto", marginTop: 38, color: "#06080F", background: "#C6A258", border: "none", fontSize: 12, letterSpacing: "0.22em", textTransform: "uppercase", padding: "16px 38px", fontWeight: 600, cursor: "pointer", animation: "vUp 1.3s .28s both" }}>Request Access</button>
-            <div style={{ marginTop: 26, fontSize: 10, letterSpacing: "0.34em", textTransform: "uppercase", color: "#56544c", animation: "vUp 1.3s .36s both" }}>By invitation or referral only</div>
           </div>
 
           {/* minimal footer bar */}
@@ -208,8 +205,7 @@ export default function VesperHome() {
             })}
           </div>
 
-          <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: "22px 28px", borderTop: "1px solid rgba(236,231,219,0.06)" }}>
-            <a href="mailto:access@vesper.club" style={{ textDecoration: "none", color: "#6f6c63", fontSize: 10, letterSpacing: "0.18em", textTransform: "uppercase" }}>Contact · Instagram · Legal</a>
+          <div style={{ display: "flex", alignItems: "center", justifyContent: "flex-end", padding: "22px 28px", borderTop: "1px solid rgba(236,231,219,0.06)" }}>
             <span style={{ fontSize: 10, letterSpacing: "0.22em", textTransform: "uppercase", color: "#56544c" }}>Madrid · 2026</span>
           </div>
         </div>
