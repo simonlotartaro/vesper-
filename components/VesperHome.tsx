@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useMemo, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 
 /**
  * Vesper — full-screen interactive homepage.
@@ -133,8 +133,8 @@ export default function VesperHome() {
                   </div>
                   {/* bottom nav button */}
                   <div style={{ position: "absolute", bottom: "9vh", left: 0, right: 0, display: "flex", flexDirection: "column", alignItems: "center", gap: 12, pointerEvents: "auto" }}>
-                    <span style={{ width: 1, height: 28, background: "rgba(198,162,88,0.35)" }} />
-                    <a href="#" style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: 13, letterSpacing: "0.3em", textTransform: "uppercase", color: active ? "rgba(198,162,88,0.95)" : "rgba(198,162,88,0.45)", textDecoration: "none", transition: "color .6s ease" }}>{col.nav}</a>
+                    <span style={{ width: 1, height: 28, background: "rgba(198,162,88,0.7)" }} />
+                    <a href="#" style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: 13, letterSpacing: "0.3em", textTransform: "uppercase", color: active ? "#C6A258" : "rgba(198,162,88,0.85)", textDecoration: "none", transition: "color .6s ease" }}>{col.nav}</a>
                   </div>
                 </div>
               );
@@ -194,7 +194,7 @@ export default function VesperHome() {
                       <div style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: 24, color: "#F4EFE4" }}>{col.name}</div>
                       <div style={{ marginTop: 6, fontSize: 10, letterSpacing: "0.22em", textTransform: "uppercase", color: "#9b988e", transition: "opacity .6s", opacity: active ? 1 : 0 }}>{col.desc}</div>
                     </div>
-                    <a href="#" onClick={(e) => e.stopPropagation()} style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: 12, letterSpacing: "0.28em", textTransform: "uppercase", color: active ? "rgba(198,162,88,0.95)" : "rgba(198,162,88,0.45)", textDecoration: "none", transition: "color .5s ease", flexShrink: 0 }}>{col.nav}</a>
+                    <a href="#" onClick={(e) => e.stopPropagation()} style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: 12, letterSpacing: "0.28em", textTransform: "uppercase", color: active ? "#C6A258" : "rgba(198,162,88,0.85)", textDecoration: "none", transition: "color .5s ease", flexShrink: 0 }}>{col.nav}</a>
                   </div>
                 </div>
               );
