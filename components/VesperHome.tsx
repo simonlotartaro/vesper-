@@ -124,7 +124,6 @@ export default function VesperHome() {
                   <div style={{ position: "absolute", inset: 0, background: "linear-gradient(180deg,rgba(6,8,15,0.55) 0%,transparent 26%,transparent 70%,rgba(6,8,15,0.7) 100%)", pointerEvents: "none" }} />
                   {/* top label stack */}
                   <div style={{ position: "absolute", top: "9vh", left: 0, right: 0, display: "flex", flexDirection: "column", alignItems: "center", gap: 14, pointerEvents: "none" }}>
-                    <span style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: 14, letterSpacing: "0.3em", color: "rgba(198,162,88,0.6)" }}>{col.no}</span>
                     <span style={{ width: 24, height: 1, background: "#C6A258", transformOrigin: "center", transition: "transform .8s cubic-bezier(.16,1,.3,1)", transform: `scaleX(${active ? 1 : 0})` }} />
                     <div style={{ textAlign: "center", transition: "opacity .7s ease, transform .7s cubic-bezier(.16,1,.3,1)", opacity: active ? 1 : 0, transform: `translateY(${active ? 0 : -8}px)` }}>
                       <div style={{ fontFamily: "'Cormorant Garamond', serif", fontWeight: 400, fontSize: "clamp(22px,2vw,30px)", color: "#F4EFE4", lineHeight: 1 }}>{col.name}</div>
@@ -189,7 +188,6 @@ export default function VesperHome() {
                       <div style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: 24, color: "#F4EFE4" }}>{col.name}</div>
                       <div style={{ marginTop: 6, fontSize: 10, letterSpacing: "0.22em", textTransform: "uppercase", color: "#9b988e", transition: "opacity .6s", opacity: active ? 1 : 0 }}>{col.desc}</div>
                     </div>
-                    <span style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: 13, letterSpacing: "0.2em", color: "rgba(198,162,88,0.6)" }}>{col.no}</span>
                   </div>
                 </div>
               );
