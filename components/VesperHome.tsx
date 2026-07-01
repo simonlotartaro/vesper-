@@ -234,7 +234,7 @@ export default function VesperHome() {
             {/* nav links */}
             <nav style={{ flex: 1, display: "flex", flexDirection: "column", justifyContent: "center", gap: "clamp(18px,3vh,32px)" }}>
               {[
-                { label: "Home",        action: () => { setMenuOpen(false); } },
+                { label: "Home",        action: () => { setMenuOpen(false); setAboutOpen(false); setContactOpen(false); setMembersOpen(false); setModalOpen(false); setHovered(null); setMobileActive(null); window.scrollTo({ top: 0, behavior: "smooth" }); } },
                 { label: "About",       action: () => { setMenuOpen(false); setAboutOpen(true); } },
                 { label: "Application", action: () => { setMenuOpen(false); setModalOpen(true); setSubmitted(false); } },
                 { label: "Contact",     action: () => { setMenuOpen(false); setContactSubmitted(false); setRobotChecked(false); setContactOpen(true); } },
