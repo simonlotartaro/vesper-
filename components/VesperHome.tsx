@@ -75,6 +75,9 @@ export default function VesperHome() {
   const [contactOpen, setContactOpen] = useState(false);
   const [contactSubmitted, setContactSubmitted] = useState(false);
   const [robotChecked, setRobotChecked] = useState(false);
+  const [membersOpen, setMembersOpen] = useState(false);
+  const [membersStep, setMembersStep] = useState<"login" | "create" | "done">("login");
+  const [membersEmail, setMembersEmail] = useState("");
   const cardRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
@@ -85,7 +88,7 @@ export default function VesperHome() {
     mq();
     window.addEventListener("resize", mq);
     const onKey = (e: KeyboardEvent) => {
-      if (e.key === "Escape") { setModalOpen(false); setAboutOpen(false); setContactOpen(false); }
+      if (e.key === "Escape") { setModalOpen(false); setAboutOpen(false); setContactOpen(false); setMembersOpen(false); }
     };
     window.addEventListener("keydown", onKey);
     return () => {
@@ -96,7 +99,7 @@ export default function VesperHome() {
   }, []);
 
   useEffect(() => {
-    document.body.style.overflow = (modalOpen || aboutOpen || contactOpen) ? "hidden" : "";
+    document.body.style.overflow = (modalOpen || aboutOpen || contactOpen || membersOpen) ? "hidden" : "";
   }, [modalOpen, aboutOpen, contactOpen]);
 
   const openModal = () => { setModalOpen(true); setSubmitted(false); };
@@ -138,7 +141,7 @@ export default function VesperHome() {
                   {/* bottom nav button */}
                   <div style={{ position: "absolute", bottom: "9vh", left: 0, right: 0, display: "flex", flexDirection: "column", alignItems: "center", gap: 12, pointerEvents: "auto" }}>
                     <span style={{ width: 1, height: 28, background: "rgba(198,162,88,0.7)" }} />
-                    <a href="#" onClick={(e) => { e.preventDefault(); if (col.nav === "About") setAboutOpen(true); if (col.nav === "Contact") { setContactSubmitted(false); setRobotChecked(false); setContactOpen(true); } }} style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: 13, letterSpacing: "0.3em", textTransform: "uppercase", color: active ? "#C6A258" : "rgba(198,162,88,0.85)", textDecoration: "none", transition: "color .6s ease" }}>{col.nav}</a>
+                    <a href="#" onClick={(e) => { e.preventDefault(); if (col.nav === "About") setAboutOpen(true); if (col.nav === "Contact") { setContactSubmitted(false); setRobotChecked(false); setContactOpen(true); } if (col.nav === "Members") { setMembersStep("login"); setMembersEmail(""); setMembersOpen(true); } }} style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: 13, letterSpacing: "0.3em", textTransform: "uppercase", color: active ? "#C6A258" : "rgba(198,162,88,0.85)", textDecoration: "none", transition: "color .6s ease" }}>{col.nav}</a>
                   </div>
                 </div>
               );
@@ -198,7 +201,7 @@ export default function VesperHome() {
                       <div style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: 24, color: "#F4EFE4" }}>{col.name}</div>
                       <div style={{ marginTop: 6, fontSize: 10, letterSpacing: "0.22em", textTransform: "uppercase", color: "#9b988e", transition: "opacity .6s", opacity: active ? 1 : 0 }}>{col.desc}</div>
                     </div>
-                    <a href="#" onClick={(e) => { e.stopPropagation(); e.preventDefault(); if (col.nav === "About") setAboutOpen(true); if (col.nav === "Contact") { setContactSubmitted(false); setRobotChecked(false); setContactOpen(true); } }} style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: 12, letterSpacing: "0.28em", textTransform: "uppercase", color: active ? "#C6A258" : "rgba(198,162,88,0.85)", textDecoration: "none", transition: "color .5s ease", flexShrink: 0 }}>{col.nav}</a>
+                    <a href="#" onClick={(e) => { e.stopPropagation(); e.preventDefault(); if (col.nav === "About") setAboutOpen(true); if (col.nav === "Contact") { setContactSubmitted(false); setRobotChecked(false); setContactOpen(true); } if (col.nav === "Members") { setMembersStep("login"); setMembersEmail(""); setMembersOpen(true); } }} style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: 12, letterSpacing: "0.28em", textTransform: "uppercase", color: active ? "#C6A258" : "rgba(198,162,88,0.85)", textDecoration: "none", transition: "color .5s ease", flexShrink: 0 }}>{col.nav}</a>
                   </div>
                 </div>
               );
@@ -399,6 +402,72 @@ export default function VesperHome() {
                 </form>
               )}
             </div>
+          </div>
+        </div>
+      )}
+
+      {/* ============ MEMBERS OVERLAY ============ */}
+      {membersOpen && (
+        <div
+          onClick={() => setMembersOpen(false)}
+          style={{ position: "fixed", inset: 0, zIndex: 100, background: "rgba(4,5,10,0.97)", backdropFilter: "blur(12px)", WebkitBackdropFilter: "blur(12px)", display: "flex", alignItems: "center", justifyContent: "center", padding: "40px 20px", animation: "vUp .4s both" }}
+        >
+          <div onClick={(e) => e.stopPropagation()} style={{ position: "relative", width: "100%", maxWidth: 420, background: "#0B0E16", border: "1px solid rgba(198,162,88,0.22)", boxShadow: "0 40px 120px rgba(0,0,0,0.7)", padding: "clamp(36px,5vw,52px)", animation: "vIn .55s cubic-bezier(.16,1,.3,1) both" }}>
+
+            <button onClick={() => setMembersOpen(false)} aria-label="Close" className="v-close" style={{ position: "absolute", top: 20, right: 20, width: 34, height: 34, background: "transparent", border: "1px solid rgba(236,231,219,0.18)", color: "#bdb9af", fontSize: 16, cursor: "pointer", lineHeight: 1 }}>×</button>
+
+            {/* eyebrow */}
+            <div style={{ fontSize: 10, letterSpacing: "0.4em", textTransform: "uppercase", color: "#C6A258", marginBottom: 24 }}>Members</div>
+
+            {membersStep === "login" && (
+              <>
+                <h2 style={{ fontFamily: "'Cormorant Garamond', serif", fontWeight: 300, fontSize: "clamp(28px,3vw,38px)", color: "#F4EFE4", lineHeight: 1.1, margin: "0 0 8px" }}>Member access.</h2>
+                <p style={{ fontSize: 13, color: "#9b988e", fontWeight: 300, margin: "0 0 36px", lineHeight: 1.6 }}>Enter your email to continue.</p>
+                <form onSubmit={(e) => { e.preventDefault(); setMembersStep("create"); }} style={{ display: "flex", flexDirection: "column", gap: 22 }}>
+                  <label style={{ display: "flex", flexDirection: "column", gap: 9 }}>
+                    <span style={fieldLabel}>Email</span>
+                    <input required type="email" placeholder="you@email.com" className="v-field" style={fieldStyle} value={membersEmail} onChange={(e) => setMembersEmail(e.target.value)} />
+                  </label>
+                  <button type="submit" className="v-submit" style={{ marginTop: 4, color: "#06080F", background: "#C6A258", border: "none", fontSize: 12, letterSpacing: "0.22em", textTransform: "uppercase", padding: "16px 30px", fontWeight: 600, cursor: "pointer" }}>Continue</button>
+                </form>
+              </>
+            )}
+
+            {membersStep === "create" && (
+              <>
+                <h2 style={{ fontFamily: "'Cormorant Garamond', serif", fontWeight: 300, fontSize: "clamp(26px,3vw,36px)", color: "#F4EFE4", lineHeight: 1.1, margin: "0 0 8px" }}>Create your password.</h2>
+                <p style={{ fontSize: 13, color: "#9b988e", fontWeight: 300, margin: "0 0 36px", lineHeight: 1.6 }}>Welcome, {membersEmail}.<br />Set a password to access your account.</p>
+                <form
+                  onSubmit={(e) => {
+                    e.preventDefault();
+                    const form = e.currentTarget;
+                    const pw = (form.elements.namedItem("pw") as HTMLInputElement).value;
+                    const confirm = (form.elements.namedItem("confirm") as HTMLInputElement).value;
+                    if (pw !== confirm) { alert("Passwords do not match."); return; }
+                    setMembersStep("done");
+                  }}
+                  style={{ display: "flex", flexDirection: "column", gap: 22 }}
+                >
+                  <label style={{ display: "flex", flexDirection: "column", gap: 9 }}>
+                    <span style={fieldLabel}>New Password</span>
+                    <input required name="pw" type="password" placeholder="••••••••" className="v-field" style={fieldStyle} minLength={8} />
+                  </label>
+                  <label style={{ display: "flex", flexDirection: "column", gap: 9 }}>
+                    <span style={fieldLabel}>Confirm Password</span>
+                    <input required name="confirm" type="password" placeholder="••••••••" className="v-field" style={fieldStyle} minLength={8} />
+                  </label>
+                  <button type="submit" className="v-submit" style={{ marginTop: 4, color: "#06080F", background: "#C6A258", border: "none", fontSize: 12, letterSpacing: "0.22em", textTransform: "uppercase", padding: "16px 30px", fontWeight: 600, cursor: "pointer" }}>Set Password</button>
+                </form>
+              </>
+            )}
+
+            {membersStep === "done" && (
+              <div style={{ textAlign: "center", padding: "20px 0 10px" }}>
+                <div style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: 38, color: "#C6A258", marginBottom: 16 }}>Welcome.</div>
+                <p style={{ fontSize: 14, color: "#bdb9af", fontWeight: 300, lineHeight: 1.7, margin: "0 auto 32px", maxWidth: 300 }}>Your password has been set. Your access to Vesper is now active.</p>
+                <button onClick={() => setMembersOpen(false)} className="v-close" style={{ background: "transparent", border: "1px solid rgba(236,231,219,0.2)", color: "#ECE7DB", fontSize: 11, letterSpacing: "0.2em", textTransform: "uppercase", padding: "13px 30px", cursor: "pointer" }}>Enter</button>
+              </div>
+            )}
           </div>
         </div>
       )}
