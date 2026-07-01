@@ -212,11 +212,11 @@ export default function VesperHome() {
         <button
           onClick={() => setMenuOpen(!menuOpen)}
           aria-label={menuOpen ? "Close menu" : "Open menu"}
-          style={{ position: "fixed", top: 24, right: 28, zIndex: 300, width: 44, height: 44, background: "transparent", border: "none", cursor: "pointer", display: "flex", flexDirection: "column", alignItems: "flex-end", justifyContent: "center", gap: 6, padding: 0 }}
+          style={{ position: "fixed", top: 36, right: 28, zIndex: 300, width: 46, height: 46, background: "transparent", border: "1px solid rgba(198,162,88,0.55)", borderRadius: "50%", cursor: "pointer", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", gap: 6, padding: 0, transition: "border-color .3s ease" }}
         >
-          <span style={{ display: "block", height: 1, background: menuOpen ? "rgba(198,162,88,0.9)" : "rgba(236,231,219,0.75)", transition: "all .4s cubic-bezier(.16,1,.3,1)", width: menuOpen ? 24 : 24, transform: menuOpen ? "translateY(3.5px) rotate(45deg)" : "none", transformOrigin: "center" }} />
-          <span style={{ display: "block", height: 1, background: menuOpen ? "rgba(198,162,88,0.9)" : "rgba(236,231,219,0.75)", transition: "all .4s cubic-bezier(.16,1,.3,1)", width: menuOpen ? 24 : 18, transform: menuOpen ? "translateY(-3.5px) rotate(-45deg)" : "none", transformOrigin: "center" }} />
-          {!menuOpen && <span style={{ display: "block", height: 1, background: "rgba(236,231,219,0.75)", width: 12 }} />}
+          <span style={{ display: "block", height: 1, background: "#C6A258", transition: "all .4s cubic-bezier(.16,1,.3,1)", width: 18, transform: menuOpen ? "translateY(3.5px) rotate(45deg)" : "none", transformOrigin: "center" }} />
+          <span style={{ display: "block", height: 1, background: "#C6A258", transition: "all .4s cubic-bezier(.16,1,.3,1)", width: menuOpen ? 18 : 13, transform: menuOpen ? "translateY(-3.5px) rotate(-45deg)" : "none", transformOrigin: "center" }} />
+          {!menuOpen && <span style={{ display: "block", height: 1, background: "#C6A258", width: 8 }} />}
         </button>
       )}
 
@@ -274,8 +274,6 @@ export default function VesperHome() {
           style={{ position: "fixed", inset: 0, zIndex: 100, display: "flex", alignItems: "flex-start", justifyContent: "center", overflowY: "auto", padding: "40px 20px", background: "rgba(4,5,10,0.72)", backdropFilter: "blur(10px)", WebkitBackdropFilter: "blur(10px)", animation: "vUp .4s both" }}
         >
           <div ref={cardRef} data-modalcard style={{ position: "relative", width: "100%", maxWidth: 560, margin: "auto", background: "#0B0E16", border: "1px solid rgba(198,162,88,0.28)", boxShadow: "0 40px 120px rgba(0,0,0,0.6)", padding: "clamp(30px,5vw,52px)", animation: "vIn .55s cubic-bezier(.16,1,.3,1) both" }}>
-            <button onClick={closeModal} aria-label="Close" className="v-close" style={{ position: "absolute", top: 20, right: 20, width: 34, height: 34, background: "transparent", border: "1px solid rgba(236,231,219,0.18)", color: "#bdb9af", fontSize: 16, cursor: "pointer", lineHeight: 1 }}>×</button>
-
             {submitted ? (
               <div style={{ textAlign: "center", padding: "30px 6px" }}>
                 <div style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: 40, color: "#C6A258", marginBottom: 18 }}>Request received.</div>
@@ -345,9 +343,6 @@ export default function VesperHome() {
             onClick={(e) => e.stopPropagation()}
             style={{ maxWidth: 680, margin: "0 auto", padding: "clamp(60px,10vh,120px) clamp(28px,6vw,60px)" }}
           >
-            {/* close */}
-            <button onClick={() => setAboutOpen(false)} aria-label="Close" className="v-close" style={{ position: "fixed", top: 28, right: 32, width: 34, height: 34, background: "transparent", border: "1px solid rgba(236,231,219,0.18)", color: "#bdb9af", fontSize: 16, cursor: "pointer", lineHeight: 1 }}>×</button>
-
             {/* eyebrow */}
             <div style={{ fontSize: 10, letterSpacing: "0.4em", textTransform: "uppercase", color: "#C6A258", marginBottom: 32 }}>About</div>
 
@@ -391,9 +386,6 @@ export default function VesperHome() {
           style={{ position: "fixed", inset: 0, zIndex: 100, background: "rgba(4,5,10,0.97)", backdropFilter: "blur(12px)", WebkitBackdropFilter: "blur(12px)", overflowY: "auto", animation: "vUp .4s both" }}
         >
           <div onClick={(e) => e.stopPropagation()} style={{ maxWidth: 960, margin: "0 auto", padding: "clamp(60px,10vh,100px) clamp(28px,6vw,60px)", display: "grid", gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr", gap: "clamp(40px,6vw,100px)", alignItems: "start" }}>
-
-            {/* close */}
-            <button onClick={() => setContactOpen(false)} aria-label="Close" className="v-close" style={{ position: "fixed", top: 28, right: 32, width: 34, height: 34, background: "transparent", border: "1px solid rgba(236,231,219,0.18)", color: "#bdb9af", fontSize: 16, cursor: "pointer", lineHeight: 1 }}>×</button>
 
             {/* LEFT — info */}
             <div>
@@ -465,8 +457,6 @@ export default function VesperHome() {
           style={{ position: "fixed", inset: 0, zIndex: 100, background: "rgba(4,5,10,0.97)", backdropFilter: "blur(12px)", WebkitBackdropFilter: "blur(12px)", display: "flex", alignItems: "center", justifyContent: "center", padding: "40px 20px", animation: "vUp .4s both" }}
         >
           <div onClick={(e) => e.stopPropagation()} style={{ position: "relative", width: "100%", maxWidth: 420, background: "#0B0E16", border: "1px solid rgba(198,162,88,0.22)", boxShadow: "0 40px 120px rgba(0,0,0,0.7)", padding: "clamp(36px,5vw,52px)", animation: "vIn .55s cubic-bezier(.16,1,.3,1) both" }}>
-
-            <button onClick={() => setMembersOpen(false)} aria-label="Close" className="v-close" style={{ position: "absolute", top: 20, right: 20, width: 34, height: 34, background: "transparent", border: "1px solid rgba(236,231,219,0.18)", color: "#bdb9af", fontSize: 16, cursor: "pointer", lineHeight: 1 }}>×</button>
 
             {/* eyebrow */}
             <div style={{ fontSize: 10, letterSpacing: "0.4em", textTransform: "uppercase", color: "#C6A258", marginBottom: 24 }}>Members</div>
