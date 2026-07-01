@@ -72,6 +72,9 @@ export default function VesperHome() {
   const [modalOpen, setModalOpen] = useState(false);
   const [submitted, setSubmitted] = useState(false);
   const [aboutOpen, setAboutOpen] = useState(false);
+  const [contactOpen, setContactOpen] = useState(false);
+  const [contactSubmitted, setContactSubmitted] = useState(false);
+  const [robotChecked, setRobotChecked] = useState(false);
   const cardRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
@@ -82,7 +85,7 @@ export default function VesperHome() {
     mq();
     window.addEventListener("resize", mq);
     const onKey = (e: KeyboardEvent) => {
-      if (e.key === "Escape") { setModalOpen(false); setAboutOpen(false); }
+      if (e.key === "Escape") { setModalOpen(false); setAboutOpen(false); setContactOpen(false); }
     };
     window.addEventListener("keydown", onKey);
     return () => {
@@ -93,8 +96,8 @@ export default function VesperHome() {
   }, []);
 
   useEffect(() => {
-    document.body.style.overflow = (modalOpen || aboutOpen) ? "hidden" : "";
-  }, [modalOpen, aboutOpen]);
+    document.body.style.overflow = (modalOpen || aboutOpen || contactOpen) ? "hidden" : "";
+  }, [modalOpen, aboutOpen, contactOpen]);
 
   const openModal = () => { setModalOpen(true); setSubmitted(false); };
   const closeModal = () => setModalOpen(false);
@@ -135,7 +138,7 @@ export default function VesperHome() {
                   {/* bottom nav button */}
                   <div style={{ position: "absolute", bottom: "9vh", left: 0, right: 0, display: "flex", flexDirection: "column", alignItems: "center", gap: 12, pointerEvents: "auto" }}>
                     <span style={{ width: 1, height: 28, background: "rgba(198,162,88,0.7)" }} />
-                    <a href="#" onClick={(e) => { e.preventDefault(); if (col.nav === "About") setAboutOpen(true); }} style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: 13, letterSpacing: "0.3em", textTransform: "uppercase", color: active ? "#C6A258" : "rgba(198,162,88,0.85)", textDecoration: "none", transition: "color .6s ease" }}>{col.nav}</a>
+                    <a href="#" onClick={(e) => { e.preventDefault(); if (col.nav === "About") setAboutOpen(true); if (col.nav === "Contact") { setContactSubmitted(false); setRobotChecked(false); setContactOpen(true); } }} style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: 13, letterSpacing: "0.3em", textTransform: "uppercase", color: active ? "#C6A258" : "rgba(198,162,88,0.85)", textDecoration: "none", transition: "color .6s ease" }}>{col.nav}</a>
                   </div>
                 </div>
               );
@@ -195,7 +198,7 @@ export default function VesperHome() {
                       <div style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: 24, color: "#F4EFE4" }}>{col.name}</div>
                       <div style={{ marginTop: 6, fontSize: 10, letterSpacing: "0.22em", textTransform: "uppercase", color: "#9b988e", transition: "opacity .6s", opacity: active ? 1 : 0 }}>{col.desc}</div>
                     </div>
-                    <a href="#" onClick={(e) => { e.stopPropagation(); e.preventDefault(); if (col.nav === "About") setAboutOpen(true); }} style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: 12, letterSpacing: "0.28em", textTransform: "uppercase", color: active ? "#C6A258" : "rgba(198,162,88,0.85)", textDecoration: "none", transition: "color .5s ease", flexShrink: 0 }}>{col.nav}</a>
+                    <a href="#" onClick={(e) => { e.stopPropagation(); e.preventDefault(); if (col.nav === "About") setAboutOpen(true); if (col.nav === "Contact") { setContactSubmitted(false); setRobotChecked(false); setContactOpen(true); } }} style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: 12, letterSpacing: "0.28em", textTransform: "uppercase", color: active ? "#C6A258" : "rgba(198,162,88,0.85)", textDecoration: "none", transition: "color .5s ease", flexShrink: 0 }}>{col.nav}</a>
                   </div>
                 </div>
               );
@@ -321,6 +324,80 @@ export default function VesperHome() {
             {/* closing line */}
             <div style={{ marginTop: 64, fontFamily: "'Cormorant Garamond', serif", fontStyle: "italic", fontWeight: 300, fontSize: "clamp(22px,2.4vw,30px)", color: "#F4EFE4" }}>
               For those who understand pressure.
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* ============ CONTACT OVERLAY ============ */}
+      {contactOpen && (
+        <div
+          onClick={() => setContactOpen(false)}
+          style={{ position: "fixed", inset: 0, zIndex: 100, background: "rgba(4,5,10,0.97)", backdropFilter: "blur(12px)", WebkitBackdropFilter: "blur(12px)", overflowY: "auto", animation: "vUp .4s both" }}
+        >
+          <div onClick={(e) => e.stopPropagation()} style={{ maxWidth: 960, margin: "0 auto", padding: "clamp(60px,10vh,100px) clamp(28px,6vw,60px)", display: "grid", gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr", gap: "clamp(40px,6vw,100px)", alignItems: "start" }}>
+
+            {/* close */}
+            <button onClick={() => setContactOpen(false)} aria-label="Close" className="v-close" style={{ position: "fixed", top: 28, right: 32, width: 34, height: 34, background: "transparent", border: "1px solid rgba(236,231,219,0.18)", color: "#bdb9af", fontSize: 16, cursor: "pointer", lineHeight: 1 }}>×</button>
+
+            {/* LEFT — info */}
+            <div>
+              <div style={{ fontSize: 10, letterSpacing: "0.4em", textTransform: "uppercase", color: "#C6A258", marginBottom: 32 }}>Contact</div>
+              <h1 style={{ fontFamily: "'Cormorant Garamond', serif", fontWeight: 300, fontSize: "clamp(34px,4vw,52px)", color: "#F4EFE4", lineHeight: 1.1, margin: "0 0 32px" }}>Get in touch.</h1>
+              <span style={{ display: "block", width: 40, height: 1, background: "#C6A258", marginBottom: 36 }} />
+              <p style={{ fontFamily: "'Cormorant Garamond', serif", fontWeight: 300, fontSize: "clamp(16px,1.4vw,19px)", color: "#9b988e", lineHeight: 1.75, margin: "0 0 40px" }}>
+                For general inquiries, membership questions or partnership opportunities, reach out directly or use the form.
+              </p>
+              <div style={{ fontSize: 10, letterSpacing: "0.3em", textTransform: "uppercase", color: "#56544c", marginBottom: 10 }}>Email</div>
+              <a href="mailto:info@vesper.com" style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "clamp(16px,1.4vw,20px)", color: "#C6A258", textDecoration: "none", letterSpacing: "0.04em" }}>info@vesper.com</a>
+            </div>
+
+            {/* RIGHT — form */}
+            <div>
+              {contactSubmitted ? (
+                <div style={{ paddingTop: 60, textAlign: "center" }}>
+                  <div style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: 38, color: "#C6A258", marginBottom: 18 }}>Message received.</div>
+                  <p style={{ fontSize: 15, color: "#bdb9af", fontWeight: 300, lineHeight: 1.7 }}>We will be in touch.</p>
+                  <button onClick={() => setContactOpen(false)} className="v-close" style={{ marginTop: 32, background: "transparent", border: "1px solid rgba(236,231,219,0.2)", color: "#ECE7DB", fontSize: 11, letterSpacing: "0.2em", textTransform: "uppercase", padding: "13px 30px", cursor: "pointer" }}>Close</button>
+                </div>
+              ) : (
+                <form onSubmit={(e) => { e.preventDefault(); if (!robotChecked) return; setContactSubmitted(true); }} style={{ display: "flex", flexDirection: "column", gap: 24, paddingTop: 8 }}>
+                  <label style={{ display: "flex", flexDirection: "column", gap: 9 }}>
+                    <span style={fieldLabel}>Full Name</span>
+                    <input required type="text" placeholder="Full name" className="v-field" style={fieldStyle} />
+                  </label>
+                  <label style={{ display: "flex", flexDirection: "column", gap: 9 }}>
+                    <span style={fieldLabel}>Email</span>
+                    <input required type="email" placeholder="you@email.com" className="v-field" style={fieldStyle} />
+                  </label>
+                  <label style={{ display: "flex", flexDirection: "column", gap: 9 }}>
+                    <span style={fieldLabel}>Telephone</span>
+                    <input type="tel" placeholder="+1 000 000 0000" className="v-field" style={fieldStyle} />
+                  </label>
+                  <label style={{ display: "flex", flexDirection: "column", gap: 9 }}>
+                    <span style={fieldLabel}>Message</span>
+                    <textarea required rows={4} placeholder="Your message." className="v-field" style={{ ...fieldStyle, resize: "none" }} />
+                  </label>
+
+                  {/* I'm not a robot */}
+                  <div style={{ display: "flex", alignItems: "center", gap: 14, border: "1px solid rgba(236,231,219,0.12)", padding: "14px 18px", background: "rgba(255,255,255,0.02)" }}>
+                    <div
+                      onClick={() => setRobotChecked(!robotChecked)}
+                      style={{ width: 22, height: 22, border: `2px solid ${robotChecked ? "#C6A258" : "rgba(236,231,219,0.3)"}`, background: robotChecked ? "rgba(198,162,88,0.15)" : "transparent", cursor: "pointer", flexShrink: 0, display: "flex", alignItems: "center", justifyContent: "center", transition: "all .25s ease" }}
+                    >
+                      {robotChecked && <span style={{ color: "#C6A258", fontSize: 13, lineHeight: 1 }}>✓</span>}
+                    </div>
+                    <span style={{ fontSize: 13, color: "#9b988e", letterSpacing: "0.04em" }}>I&apos;m not a robot</span>
+                    <div style={{ marginLeft: "auto", textAlign: "right" }}>
+                      <div style={{ fontSize: 9, letterSpacing: "0.1em", color: "#3a3830", textTransform: "uppercase", lineHeight: 1.4 }}>reCAPTCHA<br/>Privacy · Terms</div>
+                    </div>
+                  </div>
+
+                  <button type="submit" className="v-submit" style={{ marginTop: 4, color: "#06080F", background: robotChecked ? "#C6A258" : "rgba(198,162,88,0.3)", border: "none", fontSize: 12, letterSpacing: "0.22em", textTransform: "uppercase", padding: "16px 30px", fontWeight: 600, cursor: robotChecked ? "pointer" : "not-allowed", transition: "background .3s ease" }}>
+                    Submit
+                  </button>
+                </form>
+              )}
             </div>
           </div>
         </div>
